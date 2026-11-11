@@ -1,3 +1,56 @@
-@extends('layouts.app') @section('title',$book->exists?'Edit Buku':'Tambah Buku') @section('content')
-<h1>{{$book->exists?'Edit Data Buku':'Tambah Buku'}}</h1><p class="muted">Lengkapi informasi koleksi buku.</p><div class="card"><form method="POST" action="{{$book->exists?route('books.update',$book):route('books.store')}}">@csrf @if($book->exists)@method('PUT')@endif
-<div class="field"><label>Judul buku</label><input name="title" value="{{old('title',$book->title)}}" required></div><div class="grid2"><div class="field"><label>Penulis</label><input name="author" value="{{old('author',$book->author)}}" required></div><div class="field"><label>Penerbit</label><input name="publisher" value="{{old('publisher',$book->publisher)}}" required></div><div class="field"><label>Tahun terbit</label><input type="number" name="year" value="{{old('year',$book->year)}}" required></div><div class="field"><label>Stok</label><input type="number" min="0" name="stock" value="{{old('stock',$book->stock??0)}}" required></div></div><div class="field"><label>Deskripsi (opsional)</label><textarea name="description" rows="3">{{$book->description}}</textarea></div><button class="btn">Simpan</button> <a class="btn light" href="{{route('books.index')}}">Batal</a></form></div>@endsection
+
+@extends('layouts.app')
+
+@section('title',$book->exists?'Edit Buku':'Tambah Buku')
+
+@section('content')
+
+<h1>{{$book->exists?'Edit Data Buku':'Tambah Buku'}}</h1>
+<p class="muted">Lengkapi informasi koleksi buku.</p>
+
+<div class="card">
+    <form method="POST" action="{{$book->exists?route('books.update',$book):route('books.store')}}">
+        @csrf
+
+        @if($book->exists)
+            @method('PUT')
+        @endif
+
+        <div class="field">
+            <label>Judul buku</label>
+            <input name="title" value="{{old('title',$book->title)}}" required>
+        </div>
+
+        <div class="grid2">
+            <div class="field">
+                <label>Penulis</label>
+                <input name="author" value="{{old('author',$book->author)}}" required>
+            </div>
+
+            <div class="field">
+                <label>Penerbit</label>
+                <input name="publisher" value="{{old('publisher',$book->publisher)}}" required>
+            </div>
+
+            <div class="field">
+                <label>Tahun terbit</label>
+                <input type="number" name="year" value="{{old('year',$book->year)}}" required>
+            </div>
+
+            <div class="field">
+                <label>Stok</label>
+                <input type="number" min="0" name="stock" value="{{old('stock',$book->stock??0)}}" required>
+            </div>
+        </div>
+
+        <div class="field">
+            <label>Deskripsi (opsional)</label>
+            <textarea name="description" rows="3">{{$book->description}}</textarea>
+        </div>
+
+        <button class="btn">Simpan</button>
+        <a class="btn light" href="{{route('books.index')}}">Batal</a>
+    </form>
+</div>
+
+@endsection
